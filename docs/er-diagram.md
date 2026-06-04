@@ -20,77 +20,58 @@ Current planned relationships:
 
 ```mermaid
 erDiagram
-    STAKEHOLDER {
-        int StakeholderID PK
+    USER {
+        int UserID PK
         string Email
+        string PhoneNumber
         string Name
-        string Phone
+    }
+    ORDER {
+        int OrderID PK
+        string Status
+        decimal TotalPrice
+        datetime Time
+    }
+    ORDER_ITEM {
+        int OrderID PK
+        int FoodID PK
+        int Quantity
+        decimal Price
+    }
+    FOOD_ITEMS {
+        int FoodID PK
+        string Name
+        decimal Price
+    }
+    COURIER {
+        int CourierID PK
+        string Name
+        string Location
+        int AddressID FK
+        string City
     }
     ADDRESS {
         int AddressID PK
         string Street
-        string City
         string PostalCode
     }
-    CUSTOMER {
-        int StakeholderID PK
-        string Password
-    }
-    COURIER {
-        int StakeholderID PK
-        string VehicleType
-    }
     RESTAURANT {
-        int StakeholderID PK
-    }
-    UNITED_ORDERS {
-        int UnitedOrderID PK
-        datetime CreatedTime
-    }
-    ORDER {
-        int OrderID PK
-        datetime OrderTime
-        string Status
-        decimal TotalPrice
-    }
-    ORDER_ITEM {
-        int Quantity
-        decimal Price
-        decimal Subtotal
-    }
-    DISH {
-        int DishID PK
+        int RestaurantID PK
         string Name
-        decimal Price
+        string Location
+        float Rating
     }
-    CUISINE {
-        int CuisineID PK
-        string Name
-    }
-    COURIER_RATING {
-        int Rating
-        datetime TimeOfRating
-        string Comment
-    }
-    RESTAURANT_RATING {
-        int Rating
-        datetime TimeOfRating
-        string Comment
+    OFFER {
+        int OfferID PK
+        decimal Discount
+        date ValidUntil
     }
 
-    STAKEHOLDER }o--|| ADDRESS : "Has base location"
-    STAKEHOLDER ||--|| CUSTOMER : "Is-a"
-    STAKEHOLDER ||--|| COURIER : "Is-a"
-    STAKEHOLDER ||--|| RESTAURANT : "Is-a"
-    CUSTOMER ||--o{ UNITED_ORDERS : "Places"
-    UNITED_ORDERS ||--|{ ORDER : "Includes"
+    USER ||--o{ ORDER : "Places"
     ORDER ||--|{ ORDER_ITEM : "Contains"
-    ORDER_ITEM }|--|| DISH : "Refers to"
-    RESTAURANT ||--|{ DISH : "Offers"
-    DISH }|--|| CUISINE : "Specializes in"
-    COURIER }o--o{ RESTAURANT : "Tag Favorite"
-    CUSTOMER ||--o{ COURIER_RATING : "rates"
-    COURIER ||--o{ COURIER_RATING : "rated by"
-    CUSTOMER ||--o{ RESTAURANT_RATING : "rates"
-    RESTAURANT ||--o{ RESTAURANT_RATING : "rated by"
+    ORDER_ITEM }|--|| FOOD_ITEMS : "Places"
+    ORDER }o--|| COURIER : "Has"
+    COURIER }|--|| ADDRESS : "From"
+    FOOD_ITEMS }|--|| RESTAURANT : "Belongs to"
+    RESTAURANT ||--o{ OFFER : "Has"
 ```
