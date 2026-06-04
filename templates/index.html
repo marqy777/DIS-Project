@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <h1>Affordable Eats</h1>
+    <p>A simple student food ordering web-app using Flask, SQLite and direct SQL queries.</p>
+    <a class="button" href="{{ url_for('meals') }}">Browse cheap meals</a>
+</section>
+
+<section class="cards">
+    <div class="card"><h3>Find meals</h3><p>Search by max price or category.</p></div>
+    <div class="card"><h3>Place orders</h3><p>Order food using a KU student email.</p></div>
+    <div class="card"><h3>Admin overview</h3><p>See orders stored in the database.</p></div>
+</section>
+{% endblock %}

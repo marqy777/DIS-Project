@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Order placed!</h1>
+<div class="card wide">
+    <p>Order number: {{ order.order_id }}</p>
+    <p>Name: {{ order.student_name }}</p>
+    <p>Email: {{ order.email }}</p>
+    <p>Restaurant: {{ order.restaurant_name }}</p>
+    <p>Total price: {{ "%.2f"|format(order.total_price) }} kr.</p>
+    <a class="button" href="{{ url_for('meals') }}">Order more</a>
+</div>
+{% endblock %}
