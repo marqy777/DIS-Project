@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Restaurants</h1>
+<div class="grid">
+    {% for restaurant in restaurants %}
+    <div class="card">
+        <h2>{{ restaurant.name }}</h2>
+        <p>{{ restaurant.cuisine_type }}</p>
+        <p>{{ restaurant.address }}</p>
+        <p>Delivery fee: {{ "%.2f"|format(restaurant.delivery_fee) }} kr.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

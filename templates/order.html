@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Order {{ meal.name }}</h1>
+<div class="card wide">
+    <p>Restaurant: {{ meal.restaurant_name }}</p>
+    <p>Meal price: {{ "%.2f"|format(meal.price) }} kr.</p>
+    <p>Delivery fee: {{ "%.2f"|format(meal.delivery_fee) }} kr.</p>
+
+    <form method="post">
+        <label>Name</label>
+        <input name="name" required>
+
+        <label>KU email</label>
+        <input name="email" placeholder="name@student.ku.dk" required>
+
+        <label>Quantity</label>
+        <input name="quantity" type="number" min="1" value="1" required>
+
+        <button type="submit">Place order</button>
+    </form>
+</div>
+{% endblock %}

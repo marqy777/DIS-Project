@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Meals</h1>
+<form class="filter" method="get">
+    <input name="max_price" placeholder="Max price" value="{{ max_price }}">
+    <input name="category" placeholder="Category" value="{{ category }}">
+    <button type="submit">Search</button>
+    <a href="{{ url_for('meals') }}">Reset</a>
+</form>
+
+<div class="grid">
+    {% for meal in meals %}
+    <div class="card">
+        <h2>{{ meal.name }}</h2>
+        <p class="muted">{{ meal.restaurant_name }} · {{ meal.category }}</p>
+        <p>{{ meal.description }}</p>
+        <p><strong>{{ "%.2f"|format(meal.price) }} kr.</strong></p>
+        {% if meal.is_student_discount %}<p class="tag">Student discount</p>{% endif %}
+        <a class="button" href="{{ url_for('order', meal_id=meal.meal_id) }}">Order</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
